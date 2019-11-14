@@ -23,6 +23,9 @@ train_x, test_x, train_y, test_y = train_test_split(dat[correlation_results],dat
 dat=pd.read_csv('ktrain.csv')
 test_dat=pd.read_csv('ktest.csv')
 
+
+# FEATURE SELECTION USING CORRELATION AND KBEST VARIABLE SELECTION APPROACH
+
 correlation_results = ['Last_performance_score',
        'Year_of_recruitment', 'Targets_met', 'Previous_Award',
        'Training_score_average']
@@ -56,6 +59,7 @@ df=pd.DataFrame({'variable': predictors, 'scores': scores})
 
 train_x, test_x, train_y, test_y = train_test_split(dat[correlation_results],dat[response])
 
+# LOOPING THROUGH DIFFERENT MACHINE LEARNING MODELS TO DETERMINE THE MODEL WITH THE BEST ACCURACY SCORE
 
 acurracy_results_corr = []
 acurracy_results_kbest = []
@@ -172,6 +176,8 @@ kb
 b = np.array(acurracy_results_best_best)      
 b = b.reshape(5,5, order = 'F')
 b
+
+# TRAINING THE DATA USING THE BEST MODEL
 
 cl.fit(train_x,train_y)
 cfit=cl.predict(train_x)
