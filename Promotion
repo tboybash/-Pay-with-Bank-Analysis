@@ -63,6 +63,7 @@ df=pd.DataFrame({'variable': predictors, 'scores': scores})
 train_x, test_x, train_y, test_y = train_test_split(dat[correlation_results],dat[response])
 
 # LOOPING THROUGH DIFFERENT MACHINE LEARNING MODELS TO DETERMINE THE MODEL WITH THE BEST ACCURACY SCORE
+# RandomForestClassifier, DecisionTreeClassifier, LogisticRegression, GaussianNB, SVC
 
 acurracy_results_corr = []
 acurracy_results_kbest = []
