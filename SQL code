@@ -1,0 +1,12 @@
+SELECT DATE_TRUNC('MONTH', created_at),
+from_account_type,
+COUNT(CASE WHEN status IN (2,4) THEN 'failed' ELSE null END) TOTAL,
+
+COUNT (CASE WHEN status = 2 THEN 'success' ELSE null END) PASS, ROUND((TOTAL/(SUM(TOTAL) OVER (partition BY DATE_TRUNC('MONTH', created_at)))::NUMERIC),2) PCT_BANK_TO_DEBIT,
+
+ROUND((PASS/TOTAL::NUMERIC),2) PCT_SUCCESS
+FROM transactions
+WHERE currency = 'NGN' AND txn_type = 2
+AND created_at BETWEEN '2019-01-01' AND '2019-05-30' AND initiator_type != 4
+AND admin_id IS NULL AND from_account_type != ''
+GROUP BY 1,2 ORDER BY 1,2 DESC
